@@ -27,7 +27,7 @@
     "id": 4,
     "name": "Marshall Bluetooth Speaker",
     "price": 14900,
-    "image": "https://surl.li/jjyzfx",
+    "image": "https://plus.unsplash.com/premium_photo-1677159499898-b061fb5bd2d7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764",
     "category": "audio",
     "stock": 10
   },
@@ -43,7 +43,7 @@
     "id": 6,
     "name": "Logitech Wireless Mouse",
     "price": 2900,
-    "image": "https://plus.unsplash.com/premium_photo-1677159499898-b061fb5bd2d7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764",
+    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1028",
     "category": "accessories",
     "stock": 30
   },
