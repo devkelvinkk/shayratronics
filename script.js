@@ -7,7 +7,8 @@ function formatKsh(amount) {
 }
 
 // ====== Fetch Products ======
-fetch('./products.json')
+fetch('/shayratronics/products.json')
+
   .then(res => res.json())
   .then(data => {
     products = data;
