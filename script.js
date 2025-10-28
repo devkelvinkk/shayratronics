@@ -6,15 +6,18 @@ function formatKsh(amount) {
   return `Ksh ${Number(amount).toLocaleString('en-KE', { minimumFractionDigits: 2 })}`;
 }
 
-// ====== Fetch Products ======
-fetch('/shayratronics/products.json')
-
-  .then(res => res.json())
+// ====== Fetch Products (GitHub Pages compatible) ======
+fetch('./products.json')  // relative path for project page
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    return res.json();
+  })
   .then(data => {
     products = data;
     displayProducts(products);
     updateCartCount();
-  });
+  })
+  .catch(err => console.error('Failed to load products:', err));
 
 // ====== Display Products ======
 function displayProducts(productList) {
@@ -26,44 +29,24 @@ function displayProducts(productList) {
     const div = document.createElement('div');
     div.className = 'product';
     div.innerHTML = `
-  <img src="${product.image}" alt="${product.name}">
-  <h3>${product.name}</h3>
-  <div class="rating">${generateStars(product.rating || 4)}</div>
-  <p>Kes${product.price.toLocaleString()}</p>
-  <div class="product-buttons">
-    <button onclick="addToCart(${product.id})">Add to Cart</button>
-    <button onclick="viewDetails(${product.id})" class="details-btn">View Details</button>
-  </div>
-`;
-
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <div class="rating">${generateStars(product.rating || 4)}</div>
+      <p>${formatKsh(product.price)}</p>
+      <div class="product-buttons">
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+        <button onclick="viewDetails(${product.id})" class="details-btn">View Details</button>
+      </div>
+    `;
     container.appendChild(div);
   });
 }
+
 function generateStars(rating) {
   const fullStar = '★';
   const emptyStar = '☆';
   return fullStar.repeat(Math.floor(rating)) + emptyStar.repeat(5 - Math.floor(rating));
 }
-
-
-// ====== AI Recommendations ======
-function displayRecommendations() {
-  const recContainer = document.createElement('div');
-  recContainer.id = 'recommendations';
-  recContainer.innerHTML = '<h3>Recommended for You</h3>' +
-    products
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 5)
-      .map(p => `<div class="product-small"><img src="${p.image}" alt="${p.name}"><p>${p.name}</p></div>`)
-      .join('');
-  document.body.insertBefore(recContainer, document.getElementById('product-list'));
-}
-
-// ====== Dark Mode Integration ======
-const darkModeBtn = document.getElementById('dark-mode-toggle');
-darkModeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-});
 
 // ====== Add to Cart ======
 function addToCart(id) {
@@ -99,7 +82,6 @@ function openCartSidebar() {
   cartSidebar.style.right = '0';
 }
 
-// ====== Display Cart ======
 function displayCart() {
   cartItemsContainer.innerHTML = '';
   let total = 0;
@@ -131,7 +113,6 @@ function displayCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// ====== Change Quantity ======
 function changeQuantity(id, change) {
   const item = cart.find(p => p.id === id);
   if (!item) return;
@@ -146,7 +127,6 @@ function changeQuantity(id, change) {
   }
 }
 
-// ====== Remove from Cart ======
 function removeFromCart(id) {
   cart = cart.filter(item => item.id !== id);
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -154,14 +134,12 @@ function removeFromCart(id) {
   displayCart();
 }
 
-// ====== Update Cart Count ======
 function updateCartCount() {
   const count = cart.reduce((acc, item) => acc + item.quantity, 0);
   const countElement = document.getElementById('cart-count');
   if (countElement) countElement.textContent = count;
 }
 
-// ====== Place Order ======
 placeOrderBtn.addEventListener('click', () => {
   if (cart.length === 0) {
     alert('Your cart is empty!');
@@ -206,9 +184,7 @@ const searchInput = document.getElementById('search-input');
 if (searchInput) {
   searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
-    const filtered = products.filter(p =>
-      p.name.toLowerCase().includes(searchTerm)
-    );
+    const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
     displayProducts(filtered);
   });
 }
@@ -236,4 +212,10 @@ filterButtons.forEach(btn => {
       displayProducts(filtered);
     }
   });
+});
+
+// ====== Dark Mode ======
+const darkModeBtn = document.getElementById('dark-mode-toggle');
+darkModeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
 });
