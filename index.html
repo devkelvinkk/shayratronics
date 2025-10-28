@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroShop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ====== Header ====== -->
+  <header>
+    <button id="dark-mode-toggle" style="margin-left: 15px; padding: 6px 10px; border-radius:6px; cursor:pointer;">
+  🌙 Dark Mode
+</button>
+
+    <h1>ElectroShop</h1>
+    <a href="support.html" style="text-decoration: none;color: aliceblue; padding:5px 10px;margin-left: 50px;">📞 Customer Support</a>
+    <button id="cart" style="color:white; background:#1b263b; border:none; padding:8px 14px; border-radius:6px; cursor:pointer;">
+      🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+  </header>
+
+  <!-- ====== Category Filter Bar with Search ====== -->
+  <section id="filter-bar">
+    <input type="text" id="search-input" placeholder="Search for products...">
+    <div id="filter-buttons">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="phones">Phones</button>
+      <button class="filter-btn" data-category="audio">Audio</button>
+      <button class="filter-btn" data-category="accessories">Accessories</button>
+      <button class="filter-btn" data-category="monitors">Monitors</button>
+    </div>
+  </section>
+
+  <!-- ====== Product List ====== -->
+  <main id="product-list"></main>
+
+  <!-- ====== Cart Sidebar ====== -->
+  <aside id="cart-sidebar">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div id="cart-total"></div>
+    <button id="place-order">Place Order</button>
+    <button id="close-cart">Close</button>
+  </aside>
+
+  <!-- ====== Product Details Modal ====== -->
+  <div id="product-modal">
+    <div id="modal-content"></div>
+  </div>
+  <div id="toast" style="position:fixed; bottom:20px; right:20px; background:#007bff; color:#fff; padding:10px 15px; border-radius:6px; display:none;"></div>
+
+
+  <script src="script.js"></script>
+  
+</body>
+</html>

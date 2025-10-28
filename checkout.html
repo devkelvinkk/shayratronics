@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroShop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ====== Header ====== -->
+  <header>
+    <h1>ElectroShop</h1>
+    <button id="cart" style="color:white; background:#1b263b; border:none; padding:8px 14px; border-radius:6px; cursor:pointer;">
+      🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+  </header>
+
+  <!-- ====== Filter Bar + Search ====== -->
+  <section id="filter-bar">
+    <input type="text" id="search-input" placeholder="Search for products...">
+    <div id="filter-buttons">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="phones">Phones</button>
+      <button class="filter-btn" data-category="audio">Audio</button>
+      <button class="filter-btn" data-category="accessories">Accessories</button>
+      <button class="filter-btn" data-category="monitors">Monitors</button>
+    </div>
+  </section>
+
+  <!-- ====== Product List ====== -->
+  <main id="product-list"></main>
+
+  <!-- ====== Cart Sidebar ====== -->
+  <div id="cart-sidebar">
+    <div id="cart-header">
+      <h3>Your Cart</h3>
+      <button id="close-cart">✖</button>
+    </div>
+    <div id="cart-items"></div>
+    <div id="cart-total" style="margin-top:10px;"></div>
+    <button id="place-order">Place Order</button>
+  </div>
+
+  <!-- ====== Product Details Modal ====== -->
+  <div id="product-modal">
+    <div id="modal-content"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
